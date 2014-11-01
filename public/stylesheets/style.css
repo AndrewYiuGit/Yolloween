@@ -7,7 +7,7 @@ a {
     color: #00B7FF;
 }
 
-img.centered-pic {
+div.centered-pic {
     position: fixed;
     top: 50%;
     left: 50%;
