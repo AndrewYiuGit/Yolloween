@@ -16,16 +16,15 @@ router.get('/upvote',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
 	var username = query.username;
 	var location = query.location;
-	db.upVote(username, location);
+	db.vote("up",username, location);
 	res.send("Hi " + username + ", you're at " + location);
 });
 
-
 router.get('/downvote',function(req,res){
-	var query = querystring.parse(url.parse(request.url).query);
+	var query = querystring.parse(url.parse(req.url).query);
 	var username = query.username;
 	var location = query.location;
-	db.downVote(username, location);
+	db.vote("down",username, location);
 	res.send("Hi " + username + ", you're at " + location);
 });
 
