@@ -5,22 +5,10 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/nv.d3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 </head>
-<body>
+<body ng-app="scopeExample">
   <div>
-    <style>
-    #chart svg {
-      height: 400px;
-    }
-    </style>
-    <style>
-    #map_canvas {
-      width: 500px;
-      height: 400px;
-      background-color: #CCC;
-    }
-    </style>
-    <h1>Yoloween</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <h1>Yolloween</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" id = "addStreetButton">
       Add a Street to compare
     </button>
 
@@ -30,29 +18,24 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            <h4 class="modal-title" id="myModalLabel">Place the marker on the map or suggest a street</h4>
           </div>
           <div class="modal-body">
             <div id="map_canvas"></div>
+            <input type="email" class="form-control" id="streetInput" placeholder="Suggest a street: e.g. 'Orange Street'">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="updateChart()">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-
-
-    <label>Name:</label>
-    <input type="text" ng-model="yourName" placeholder="Enter a name here">
     <hr>
-    <h1>Hello {{yourName}}!</h1>
     <div id="chart">
       <svg></svg>
     </div>
-  </svg>
-</div>
+  </div>
 </body>
 
 <script src="http://d3js.org/d3.v3.js"></script>
@@ -65,6 +48,6 @@
 <script src="/javascript/candygraph.js"></script>
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 <script src="/javascript/maps.js"></script>
 </html>

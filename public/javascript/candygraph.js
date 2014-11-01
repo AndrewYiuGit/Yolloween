@@ -1,48 +1,58 @@
+var chart;
+var dataSet = [];
+
 nv.addGraph(function() {
-  var chart = nv.models.lineChart()
-    .useInteractiveGuideline(true)
-    ;
+  chart = nv.models.lineChart()
+  .useInteractiveGuideline(true)
+  ;
 
   chart.xAxis
-    .axisLabel('Distance (m)')
-    .tickFormat(d3.format(',r'))
-    ;
+  .axisLabel('Distance (m)')
+  .tickFormat(d3.format(',r'))
+  ;
 
   chart.yAxis
-    .axisLabel('Candy')
-    .tickFormat(d3.format('.r'))
-    ;
+  .axisLabel('Candy')
+  .tickFormat(d3.format('.r'))
+  ;
 
-  d3.select('#chart svg')
-    .datum(getData())
-    .transition().duration(500)
-    .call(chart)
-    ;
-
+  updateChart();
   nv.utils.windowResize(chart.update);
 
   return chart;
 });
 
+function updateChart(){
+  $.get( "/yocalls/streetRating", { street: "Massachusetts Avenue"} )
+  .done(function( data ) {
+    dataSet.push(resp.data);
+    alert( "Data Loaded: " + data );
+  });
+  // $http.get('/yocalls/streetRating?street='+"Massachusetts Avenue").then(function(resp) {
+  //   console.log('Success', resp);
+  //   dataSet.push(resp.data);
+  //   // For JSON responses, resp.data contains the result
+  // }, function(err) {
+  //   console.error('ERR', err);
+  //   // err.status will contain the status code
+  // });
+  // db.getStreetRatings('Massachusetts Avenue', function(data){
+  //   dataSet.push(data);
+  // });
+d3.select('#chart svg')
+.datum(getData())
+.transition().duration(500)
+.call(chart)
+;
+}
+
 function getData() {
-  var sin = [],
-      cos = [];
-
-  for (var i = 0; i < 100; i++) {
-    sin.push({x: i, y: Math.floor((Math.random() * 100) + 1)});
-    cos.push({x: i, y: Math.floor((Math.random() * 100) + 1)});
+  var returnSet = [];
+  for(var i = 0 ; i < dataSet.length; i ++){
+    returnSet.push({
+      values: dataSet[i],
+      key: ('Main Street' + i),
+      color: '#ff7f0e'});
   }
-
-  return [
-    {
-      values: sin,
-      key: 'Main Street',
-      color: '#ff7f0e'
-    },
-    {
-      values: cos,
-      key: 'Front Street',
-      color: '#2ca02c'
-    }
-  ];
+  return returnSet;
 }
