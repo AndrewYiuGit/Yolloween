@@ -15,7 +15,7 @@ router.get('/yo',function(req,res){
 		var post_data = querystring.stringify({
       		'api_token' : process.env.YOLLOWEEN_API,
       		'username': username,
-      		'link': 'https://yolloween.herokuapp.com/results/' + data.upvote + "&" + data.downvote
+      		'link': 'https://yolloween.herokuapp.com/results/' + (data.upvote - data.downvote)
   			});
 		
 		var post_options = {
