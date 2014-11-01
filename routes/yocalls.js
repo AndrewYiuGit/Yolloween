@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 var querystring = require('querystring');
 var url  = require('url');
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/test');
 
 router.get('/yo',function(req,res){
 	res.send("Yo Request");
