@@ -20,7 +20,7 @@ function getAddress(location, callback){
 	});
 }
 
-function upVote(username, location){
+function vote(type, username, location){
 	getAddress(location, function(address){
 		locations.findOne({full_address: address}, function(err, data){
 			if (err){
@@ -30,7 +30,10 @@ function upVote(username, location){
 				console.log(data);
 				if (!(username in data.users)){
 					data.users[data.users.length] = username;
-					data.upvote++;	
+					if (type=== "up")
+						data.upvote++;	
+					else if (type === "down")
+						data.downvote++;
 					locations.updateById(data._id,data,function(err, data){
 						if (err){
 							console.log(err);
@@ -44,14 +47,16 @@ function upVote(username, location){
 	});
 }
 
-function downVote(username, location){
-
-}
-
 function getRating(location){
+	getAddress(location, function(address){
+
+	});
+}
+
+function getStreetRatings(streetName, callback){
 
 }
 
-exports.upVote = upVote;
-exports.downVote = downVote;
+exports.vote = vote;
 exports.getRating = getRating;
+exports.getStreetRatings = getStreetRatings;
