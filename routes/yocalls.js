@@ -8,8 +8,9 @@ router.get('/yo',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
 	var username = query.username;
 	var location = query.location;
-	var rating = db.getRating(location);
-	res.send("Yo Request");
+	var rating = db.getRating(location, function(data){
+		res.send("Hi " + username + ", you're at " + data.full_address + " with " + data.upvote + " upvotes and " + data.downvote + " downvotes ");
+	});
 });
 
 router.get('/upvote',function(req,res){

@@ -61,7 +61,13 @@ function getRating(location, callback){
 }
 
 function getStreetRatings(streetName, callback){
-
+	locations.find({street: streetName}, function(err, data){
+		if (err){
+			console.log(err);
+		} else {
+			console.log(data);
+		}
+	});
 }
 
 exports.vote = vote;
