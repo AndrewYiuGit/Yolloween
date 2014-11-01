@@ -2,9 +2,9 @@ Happy Yolloween!
 
 URL Callback: 
 
-- Yo: http://yolloween.ngrok.com/yocall/yo
-- Upvote: http://yolloween.ngrok.com/yocall/upvote
-- Downvote: http://yolloween.ngrok.com/yocall/downvote
+- Yo: http://yolloween.ngrok.com/yocalls/yo
+- Upvote: http://yolloween.ngrok.com/yocalls/upvote
+- Downvote: http://yolloween.ngrok.com/yocalls/downvote
 
 Example:
 ```
