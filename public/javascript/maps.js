@@ -1,16 +1,67 @@
-var map;
-function initialize() {
+angular.module('scopeExample', [])
+.controller('MapsController', ['$scope', function($scope) {
+	$scope.username = 'World';
 
-  var mapCanvas = document.getElementById('map_canvas');
-  var mapOptions = {
-    center: new google.maps.LatLng(44.5403, -78.5463),
-    zoom: 8,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  }
-  map = new google.maps.Map(mapCanvas, mapOptions);
+	$scope.sayHello = function() {
+		$scope.greeting = 'Hello ' + $scope.username + '!';
+	}
+
+}]);
+var geocoder;
+var map;
+var infowindow = new google.maps.InfoWindow();
+var marker;
+
+
+function initialize() {
+	geocoder = new google.maps.Geocoder();
+	var mapOptions = {
+		zoom: 4,
+		center: new google.maps.LatLng(41.3100, -72.9236),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+
+	map = new google.maps.Map(document.getElementById('map_canvas'),
+		mapOptions);
+
+	marker = new google.maps.Marker({
+		position: map.getCenter(),
+		map: map,
+		title: 'Click to zoom'
+	});
+
+	google.maps.event.addListener(map, 'click', function(event) {
+		var clickedLatLng = event.latLng;
+		marker.setPosition(clickedLatLng);
+		codeLatLng(clickedLatLng);
+	});
 }
+
+function codeLatLng(latLng) {
+	geocoder.geocode({'latLng': latLng}, function(results, status) {
+		if (status == google.maps.GeocoderStatus.OK) {
+			console.log(results);
+			if (results[0]) {
+				console.log("success");
+				console.log(results[0]);
+				streetName = results[0].address_components[1].long_name
+				infowindow.setContent(streetName);
+				infowindow.open(map, marker);
+				$('#streetInput').val(streetName);
+			}
+			else{
+				infowindow.setContent("Couldn't find street name");
+				infowindow.open(map, marker);
+			}
+		} else {
+			alert("Geocoder failed due to: " + status);
+			console.log("failed");
+		}
+	});
+}
+
 google.maps.event.addDomListener(window, 'load', initialize);
 
 $('#myModal').on('shown.bs.modal', function () {
-    google.maps.event.trigger(map, "resize");
+	google.maps.event.trigger(map, "resize");
 });

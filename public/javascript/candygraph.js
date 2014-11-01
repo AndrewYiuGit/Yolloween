@@ -1,48 +1,60 @@
+var chart;
+var dataSet = [];
+
 nv.addGraph(function() {
-  var chart = nv.models.lineChart()
-    .useInteractiveGuideline(true)
-    ;
+  chart = nv.models.lineChart()
+  .useInteractiveGuideline(true)
+  ;
 
   chart.xAxis
-    .axisLabel('Distance (m)')
-    .tickFormat(d3.format(',r'))
-    ;
+  .axisLabel('Distance (m)')
+  .tickFormat(d3.format(',r'))
+  ;
 
   chart.yAxis
-    .axisLabel('Candy')
-    .tickFormat(d3.format('.r'))
-    ;
-
+  .axisLabel('Candy')
+  .tickFormat(d3.format('.r'))
+  ;
   d3.select('#chart svg')
-    .datum(getData())
-    .transition().duration(500)
-    .call(chart)
-    ;
-
+      .datum(getData())
+      .transition().duration(500)
+      .call(chart)
+      ;
   nv.utils.windowResize(chart.update);
 
   return chart;
 });
 
-function getData() {
-  var sin = [],
-      cos = [];
+function updateChart(){
+  var street_name =$('#streetInput').val();
+  var request = $.ajax(
+  {
+    url: '/yocalls/street_rating',
+    type: 'GET',
+    data: 'street='+street_name.replace(" ","+"),
+    success: function(data) {
 
-  for (var i = 0; i < 100; i++) {
-    sin.push({x: i, y: Math.floor((Math.random() * 100) + 1)});
-    cos.push({x: i, y: Math.floor((Math.random() * 100) + 1)});
-  }
-
-  return [
-    {
-      values: sin,
-      key: 'Main Street',
-      color: '#ff7f0e'
+      dataSet.push({
+        street_name: street_name,
+        data: data});
+      d3.select('#chart svg')
+      .datum(getData())
+      .transition().duration(500)
+      .call(chart)
+      ;
     },
-    {
-      values: cos,
-      key: 'Front Street',
-      color: '#2ca02c'
+    error: function(e) {
+      console.log("FAIL");
     }
-  ];
+  });
+}
+function getData() {
+  var returnSet = [];
+  for(var i = 0 ; i < dataSet.length; i ++){
+    returnSet.push({
+      values: dataSet[i].data,
+      key: dataSet[i].street_name,
+      color: '#ff7f0e'});
+  }
+  return returnSet;
 }
