@@ -1,12 +1,3 @@
-angular.module('scopeExample', [])
-.controller('MapsController', ['$scope', function($scope) {
-	$scope.username = 'World';
-
-	$scope.sayHello = function() {
-		$scope.greeting = 'Hello ' + $scope.username + '!';
-	}
-
-}]);
 var geocoder;
 var map;
 var infowindow = new google.maps.InfoWindow();
@@ -16,37 +7,30 @@ var marker;
 function initialize() {
 	geocoder = new google.maps.Geocoder();
 	var mapOptions = {
-		zoom: 4,
-		center: new google.maps.LatLng(41.3100, -72.9236),
+		zoom: 16,
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 	};
-
 	map = new google.maps.Map(document.getElementById('map_canvas'),
 		mapOptions);
 
-	marker = new google.maps.Marker({
-		position: map.getCenter(),
-		map: map,
-		title: 'Click to zoom'
-	});
-
-	google.maps.event.addListener(map, 'click', function(event) {
-		var clickedLatLng = event.latLng;
-		// var request = $.ajax(
-		// {
-		// 	url: '/yocalls/downvote?username='+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)+'&location='+clickedLatLng.lat()+';'+clickedLatLng.lng(),
-		// 	type: 'GET',
-		// 	// data: {username: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-		// 	// location: clickedLatLng.lat()+','+clickedLatLng.lng()},
-		// 	success: function(data) {
-		// 	},
-		// 	error: function(e) {
-		// 		console.log("FAIL");
-		// 	}
-		// });
-		marker.setPosition(clickedLatLng);
-		codeLatLng(clickedLatLng);
-	});
+	google.maps.event.addListener(map, 'click', 
+		function(event) {
+			var clickedLatLng = event.latLng;
+			// var request = $.ajax(
+			// {
+			// 	url: '/yocalls/downvote?username='+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)+'&location='+clickedLatLng.lat()+';'+clickedLatLng.lng(),
+			// 	type: 'GET',
+			// 	// data: {username: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
+			// 	// location: clickedLatLng.lat()+','+clickedLatLng.lng()},
+			// 	success: function(data) {
+			// 	},
+			// 	error: function(e) {
+			// 		console.log("FAIL");
+			// 	}
+			// });
+	marker.setPosition(clickedLatLng);
+	codeLatLng(clickedLatLng);
+});
 }
 
 function codeLatLng(latLng) {
@@ -76,4 +60,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
 $('#myModal').on('shown.bs.modal', function () {
 	google.maps.event.trigger(map, "resize");
+	map.setCenter(new google.maps.LatLng(41.255158699999996, -72.9931128));
+	marker = new google.maps.Marker({
+		position: map.getCenter(),
+		map: map
+	});
 });
