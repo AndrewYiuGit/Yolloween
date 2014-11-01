@@ -14,23 +14,29 @@ div.centered-pic {
     transform: translate(-50%, -50%);
 }
 
+div.threefourths-pic {
+    -moz-transform:scale(0.75);
+    -webkit-transform:scale(0.75);
+    transform: scale(0.75);
+}
+
 #chart svg {
-	height: 400px;
+    height: 400px;
 }
 
 #map_canvas {
-	width: 570px;
-	height: 400px;
-	background-color: #CCC;
+    width: 570px;
+    height: 400px;
+    background-color: #CCC;
 }
 
 h1{
-	display: inline-block;
+    display: inline-block;
 }
 
 #addStreetButton {
-	float: right;
-	display: inline-block;
+    float: right;
+    display: inline-block;
 }
 
 .super_large_text {
