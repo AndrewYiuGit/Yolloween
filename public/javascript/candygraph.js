@@ -15,43 +15,45 @@ nv.addGraph(function() {
   .axisLabel('Candy')
   .tickFormat(d3.format('.r'))
   ;
-
-  updateChart();
+  d3.select('#chart svg')
+      .datum(getData())
+      .transition().duration(500)
+      .call(chart)
+      ;
   nv.utils.windowResize(chart.update);
 
   return chart;
 });
 
 function updateChart(){
-  $.get( "/yocalls/streetRating", { street: "Massachusetts Avenue"} )
-  .done(function( data ) {
-    dataSet.push(resp.data);
-    alert( "Data Loaded: " + data );
-  });
-  // $http.get('/yocalls/streetRating?street='+"Massachusetts Avenue").then(function(resp) {
-  //   console.log('Success', resp);
-  //   dataSet.push(resp.data);
-  //   // For JSON responses, resp.data contains the result
-  // }, function(err) {
-  //   console.error('ERR', err);
-  //   // err.status will contain the status code
-  // });
-  // db.getStreetRatings('Massachusetts Avenue', function(data){
-  //   dataSet.push(data);
-  // });
-d3.select('#chart svg')
-.datum(getData())
-.transition().duration(500)
-.call(chart)
-;
-}
+  var street_name =$('#streetInput').val();
+  var request = $.ajax(
+  {
+    url: '/yocalls/street_rating',
+    type: 'GET',
+    data: 'street='+street_name.replace(" ","+"),
+    success: function(data) {
 
+      dataSet.push({
+        street_name: street_name,
+        data: data});
+      d3.select('#chart svg')
+      .datum(getData())
+      .transition().duration(500)
+      .call(chart)
+      ;
+    },
+    error: function(e) {
+      console.log("FAIL");
+    }
+  });
+}
 function getData() {
   var returnSet = [];
   for(var i = 0 ; i < dataSet.length; i ++){
     returnSet.push({
-      values: dataSet[i],
-      key: ('Main Street' + i),
+      values: dataSet[i].data,
+      key: dataSet[i].street_name,
       color: '#ff7f0e'});
   }
   return returnSet;

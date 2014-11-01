@@ -97,7 +97,7 @@ function getStreetRatings(streetName, callback){
 				data[data.length] = {"x":data.length+1, "y":element.upvote-element.downvote};
 			});
 			console.log(data);
-			// callback(data);
+			callback(data);
 		}
 	});
 }
