@@ -68,7 +68,7 @@ function vote(type, username, location){
 
 function getRating(location, callback){
 	getAddress(location, function(address){
-		locations.findOne({full_address: address}, function(err, data){
+		locations.findOne({full_address: address.formatted_address}, function(err, data){
 			if (err){
 				console.log(err);
 			} else if (data) {
@@ -85,7 +85,19 @@ function getStreetRatings(streetName, callback){
 		if (err){
 			console.log(err);
 		} else {
+			docs = docs.sort(function(a,b){
+				if (a.street_number < b.street_number)
+     				return -1;
+  				if (a.street_number > b.street_number)
+    				return 1;
+  				return 0;
+			});
+			data = []
+			docs.forEach(function(element, index, array){
+				data[data.length] = {"x":data.length+1, "y":element.upvote-element.downvote};
+			});
 			console.log(data);
+			// callback(data);
 		}
 	});
 }
