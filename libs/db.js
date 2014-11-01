@@ -13,7 +13,7 @@ function getAddress(location, callback){
   		});
   		response.on('end', function () {
   			data = JSON.parse(str);
-    		callback(data.results[0].formatted_address);
+    		callback(data.results[0]);
   		});
 	}).on('error', function(e) {
   		console.log("Got error: " + e.message);
@@ -22,7 +22,8 @@ function getAddress(location, callback){
 
 function vote(type, username, location){
 	getAddress(location, function(address){
-		locations.findOne({full_address: address}, function(err, data){
+		console.log(address);
+		locations.findOne({full_address: address.formatted_address}, function(err, data){
 			if (err){
 				console.log(err);
 			} else if (data) {
@@ -40,7 +41,26 @@ function vote(type, username, location){
 					});
 				}
 			} else {
-				console.log("Found no shit");
+				data = {
+						"full_address": address.formatted_address,
+						"users":[username]
+				};
+				var components = address.address_components;
+				for (var i = 0; i < components.length; i++){
+					if (components[i].types.indexOf("street_number") > -1){
+						data["street_number"] = components[i].long_name;
+					} else if (components[i].types.indexOf("route") > -1){
+						data["street"] = components[i].long_name;
+					}
+				}
+				if (type=== "up"){
+					data["upvote"] = 1;
+					data["downvote"] = 0;	
+				} else if (type === "down"){
+					data["upvote"] = 0;
+					data["downvote"] = 1;
+				}
+				locations.insert(data);
 			}
 		});
 	});
@@ -61,7 +81,7 @@ function getRating(location, callback){
 }
 
 function getStreetRatings(streetName, callback){
-	locations.find({street: streetName}, function(err, data){
+	locations.find({street: streetName}, function(err, docs){
 		if (err){
 			console.log(err);
 		} else {
