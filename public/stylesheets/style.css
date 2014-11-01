@@ -32,3 +32,7 @@ h1{
 	float: right;
 	display: inline-block;
 }
+
+.super_large_text {
+    font-size: 500% !important;
+}
