@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var querystring = require('querystring');
 var url  = require('url');
-var db = require('./libs/db');
+var db = require('../libs/db');
 
 router.get('/yo',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
