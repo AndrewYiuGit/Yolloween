@@ -32,20 +32,18 @@ function initialize() {
 
 	google.maps.event.addListener(map, 'click', function(event) {
 		var clickedLatLng = event.latLng;
-		var params = 'username='+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)+'&location='+clickedLatLng.lat()+';'+clickedLatLng.lng();
-		console.log(params);
-		var request = $.ajax(
-		{
-			url: '/yocalls/upvote?username='+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)+'&location='+clickedLatLng.lat()+';'+clickedLatLng.lng(),
-			type: 'GET',
-			// data: {username: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-			// location: clickedLatLng.lat()+','+clickedLatLng.lng()},
-			success: function(data) {
-			},
-			error: function(e) {
-				console.log("FAIL");
-			}
-		});
+		// var request = $.ajax(
+		// {
+		// 	url: '/yocalls/downvote?username='+Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5)+'&location='+clickedLatLng.lat()+';'+clickedLatLng.lng(),
+		// 	type: 'GET',
+		// 	// data: {username: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
+		// 	// location: clickedLatLng.lat()+','+clickedLatLng.lng()},
+		// 	success: function(data) {
+		// 	},
+		// 	error: function(e) {
+		// 		console.log("FAIL");
+		// 	}
+		// });
 		marker.setPosition(clickedLatLng);
 		codeLatLng(clickedLatLng);
 	});

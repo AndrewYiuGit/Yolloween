@@ -22,7 +22,6 @@ function getAddress(location, callback){
 
 function vote(type, username, location){
 	getAddress(location, function(address){
-		console.log(address);
 		locations.findOne({full_address: address.formatted_address}, function(err, data){
 			if (err){
 				console.log(err);
@@ -33,7 +32,7 @@ function vote(type, username, location){
 						data.upvote++;	
 					else if (type === "down")
 						data.downvote++;
-					console.log(data);
+					// console.log(data.full_address);
 					locations.updateById(data._id,data,function(err, data){
 						if (err){
 							console.log(err);
@@ -60,6 +59,7 @@ function vote(type, username, location){
 					data["upvote"] = 0;
 					data["downvote"] = 1;
 				}
+				// console.log(data.full_address);
 				locations.insert(data);
 			}
 		});
