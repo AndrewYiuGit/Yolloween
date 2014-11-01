@@ -20,6 +20,15 @@ div.threefourths-pic {
     transform: scale(0.75);
 }
 
+h1{
+    display: inline-block;
+}
+
+
+#streetInput {
+    margin-top: 20px;
+}
+
 #chart svg {
     height: 400px;
 }
@@ -28,10 +37,6 @@ div.threefourths-pic {
     width: 570px;
     height: 400px;
     background-color: #CCC;
-}
-
-h1{
-    display: inline-block;
 }
 
 #addStreetButton {
