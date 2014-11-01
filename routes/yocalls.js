@@ -48,6 +48,7 @@ router.get('/yo',function(req,res){
 		post_req.write(post_data);
   	post_req.end();
 		res.send("Hi " + username + ", you're at " + data.full_address + " with " + data.upvote + " upvotes and " + data.downvote + " downvotes ");
+    db.getStreetRatings("Massachusetts Avenue", function(data){});
 	});
 });
 
@@ -65,6 +66,15 @@ router.get('/downvote',function(req,res){
 	var location = query.location;
 	db.vote("down",username, location);
 	res.send("Hi " + username + ", you're at " + location);
+});
+
+router.get('/street_rating', function(req,res){
+  var query = querystring.parse(url.parse(req.url).query);
+  var street = query.street;
+  console.log(street);
+  db.getStreetRatings(street,function(data){
+    res.send(data);
+  })
 });
 
 module.exports = router;
