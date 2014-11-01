@@ -12,14 +12,10 @@ router.get('/yo',function(req,res){
 	var location = query.location;
 	var rating = db.getRating(location, function(data){
 		var url = "http://api.justyo.co/yo/";
-    if (data.upvote > data.downvote)
-      link = "https://yolloween.herokuapp.com/results/good";
-    else
-      link = "https://yolloween.herokuapp.com/results/bad";
 		var post_data = querystring.stringify({
       		'api_token' : process.env.YOLLOWEEN_API,
       		'username': username,
-      		'link':link
+      		'link': 'https://yolloween.herokuapp.com/results/' + data.upvote + "&" + data.downvote
   			});
 		
 		var post_options = {

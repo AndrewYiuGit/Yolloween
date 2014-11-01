@@ -86,6 +86,10 @@ function getStreetRatings(streetName, callback){
 			console.log(err);
 		} else {
 			docs = docs.sort(function(a,b){
+				if (!a.street_number):
+					return -1;
+				if (!b.street_number):
+					return -1;
 				if (a.street_number < b.street_number)
      				return -1;
   				if (a.street_number > b.street_number)
