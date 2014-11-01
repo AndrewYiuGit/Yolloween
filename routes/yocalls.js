@@ -8,14 +8,18 @@ var os = require('os');
 
 router.get('/yo',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
-	var username = query.username;
+	var username = query.username.toUpperCase();
 	var location = query.location;
 	var rating = db.getRating(location, function(data){
 		var url = "http://api.justyo.co/yo/";
+    if (data.upvote > data.downvote)
+      link = "https://yolloween.herokuapp.com/results/good";
+    else
+      link = "https://yolloween.herokuapp.com/results/bad";
 		var post_data = querystring.stringify({
       		'api_token' : process.env.YOLLOWEEN_API,
       		'username': username,
-      		'link':'yolloween.herokuapp.com/assets/images/yo_checkmark.jpg'
+      		'link':link
   			});
 		
 		var post_options = {
@@ -30,26 +34,26 @@ router.get('/yo',function(req,res){
      			}
   			};
 
-  		var post_req = http.request(post_options, function(response) {
-     		str = ''
-      		response.on('data', function (chunk) {
-          		str += chunk;
-      		});
-      		response.on('end', function () {
-  				console.log(str);
-  			});	
-  		}).on('error', function(e) {
-  			console.log("Got error: " + e.message);
+		var post_req = http.request(post_options, function(response) {
+   		str = ''
+    		response.on('data', function (chunk) {
+        		str += chunk;
+    		});
+    		response.on('end', function () {
+				console.log(str);
+			});	
+		}).on('error', function(e) {
+			console.log("Got error: " + e.message);
 		});
 		post_req.write(post_data);
-  		post_req.end();
+  	post_req.end();
 		res.send("Hi " + username + ", you're at " + data.full_address + " with " + data.upvote + " upvotes and " + data.downvote + " downvotes ");
 	});
 });
 
 router.get('/upvote',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
-	var username = query.username;
+	var username = query.username.toUpperCase();
 	var location = query.location;
 	db.vote("up",username, location);
 	res.send("Hi " + username + ", you're at " + location);
@@ -57,7 +61,7 @@ router.get('/upvote',function(req,res){
 
 router.get('/downvote',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
-	var username = query.username;
+	var username = query.username.toUpperCase();
 	var location = query.location;
 	db.vote("down",username, location);
 	res.send("Hi " + username + ", you're at " + location);
