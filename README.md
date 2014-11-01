@@ -8,7 +8,7 @@ URL Callback:
 
 Example:
 ```
-http://yolloween.ngrok.com/yocall/upvote?username=THEYOER&location=42.360091;-71.094159
+http://yolloween.ngrok.com/yocalls/upvote?username=THEYOER&location=42.360091;-71.094159
 ```
 
 Run `npm install` first time pulling
