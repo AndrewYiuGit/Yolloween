@@ -7,7 +7,11 @@
 <body>
 <div class="centered-pic">
     <img src="<%= picture_path %>">
-    <span class="badge"><%= count %></span>
+    <% if differences > 0 %>
+        <span class="badge alert-success"><%= count %></span>
+    <% else %>
+        <span class="badge alert-danger"><%= count %></span>
+    <% end %>
 </div>
 </body>
 </html>
