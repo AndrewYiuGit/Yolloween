@@ -26,14 +26,13 @@ function vote(type, username, location){
 			if (err){
 				console.log(err);
 			} else if (data) {
-				console.log(username);
-				console.log(data);
-				if (!(username in data.users)){
+				if (data.users.indexOf(username) < 0){
 					data.users[data.users.length] = username;
 					if (type=== "up")
 						data.upvote++;	
 					else if (type === "down")
 						data.downvote++;
+					console.log(data);
 					locations.updateById(data._id,data,function(err, data){
 						if (err){
 							console.log(err);
@@ -43,13 +42,21 @@ function vote(type, username, location){
 			} else {
 				console.log("Found no shit");
 			}
-		})
+		});
 	});
 }
 
-function getRating(location){
+function getRating(location, callback){
 	getAddress(location, function(address){
-
+		locations.findOne({full_address: address}, function(err, data){
+			if (err){
+				console.log(err);
+			} else if (data) {
+				callback(data);
+			} else {
+				console.log("Found no shit");
+			}
+		});
 	});
 }
 
