@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/good', function(req, res) {
-  res.render('yo_good_results', { title: 'Yolloween' });
+router.get('/good/:count', function(req, res) {
+  res.render('results', { title: 'Yolloween', count: req.params.count, picture_path: '/assets/images/checkmark_xl.png' });
 });
 
-router.get('/bad', function(req, res) {
-  res.render('yo_bad_results', { title: 'Yolloween' });
+router.get('/bad/:count', function(req, res) {
+  res.render('results', { title: 'Yolloween', count: req.params.count, picture_path: '/assets/images/cross_xl.png' });
 });
 
 module.exports = router;
