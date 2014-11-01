@@ -4,6 +4,7 @@ var http = require('http');
 var querystring = require('querystring');
 var url  = require('url');
 var db = require('../libs/db');
+var os = require('os');
 
 router.get('/yo',function(req,res){
 	var query = querystring.parse(url.parse(req.url).query);
@@ -14,7 +15,7 @@ router.get('/yo',function(req,res){
 		var post_data = querystring.stringify({
       		'api_token' : process.env.YOLLOWEEN_API,
       		'username': username,
-      		'link': 
+      		'link':'yolloween.herokuapp.com/assets/images/yo_checkmark.jpg'
   			});
 		
 		var post_options = {
