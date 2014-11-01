@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var graph = require('./public/javascript/candygraph.js');
 var angular = require('./public/javascript/angular.min.js');
+var yo = require('./routes/yocalls');
 
 var app = express();
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/yocalls', yo);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
