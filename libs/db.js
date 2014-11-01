@@ -96,7 +96,6 @@ function getStreetRatings(streetName, callback){
 			docs.forEach(function(element, index, array){
 				data[data.length] = {"x":data.length+1, "y":element.upvote-element.downvote};
 			});
-			console.log(data);
 			callback(data);
 		}
 	});

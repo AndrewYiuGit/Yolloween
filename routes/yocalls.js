@@ -71,9 +71,9 @@ router.get('/downvote',function(req,res){
 router.get('/street_rating', function(req,res){
   var query = querystring.parse(url.parse(req.url).query);
   var street = query.street;
-  // console.log(street);
   db.getStreetRatings(street,function(data){
     res.send(data);
+    res.end();
   })
 });
 
