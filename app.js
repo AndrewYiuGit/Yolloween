@@ -15,6 +15,7 @@ var img = require('./routes/results');
 var app = express();
 
 // view engine setup
+app.use(favicon(__dirname + '/public/assets/favicon.ico'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 

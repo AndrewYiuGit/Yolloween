@@ -42,3 +42,16 @@ h1{
 .super_large_text {
     font-size: 500% !important;
 }
+
+body.splash_screen {
+    background-image: url('/assets/images/splash_screen.jpg');
+    background-color: #000000;
+}
+
+h3.light-text {
+    color: #FEFEFE;
+}
+
+a.clickable-div {
+    display: block;
+}
