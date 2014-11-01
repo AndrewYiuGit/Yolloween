@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var graph = require('./public/javascript/candygraph.js');
+var angular = require('./public/javascript/angular.min.js');
 
 var app = express();
 
