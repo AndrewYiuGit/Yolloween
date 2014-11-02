@@ -14,6 +14,13 @@ div.centered-pic {
     transform: translate(-50%, -50%);
 }
 
+div.horizontal-center {
+    text-align: center !important;
+    display: block !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
 div.threefourths-pic {
     -moz-transform:scale(0.75);
     -webkit-transform:scale(0.75);
@@ -59,4 +66,9 @@ h3.light-text {
 
 a.clickable-div {
     display: block;
+}
+
+div.splash-sect {
+    margin: 15px !important;
+    padding: 5px !important;
 }

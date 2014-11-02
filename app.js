@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 var dotenv = require('dotenv');
 dotenv.load();
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var splash = require('./routes/splash');
+var home = require('./routes/index');
 var yo = require('./routes/yocalls');
 var img = require('./routes/results');
 
@@ -27,8 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', splash);
+app.use('/home', home);
 app.use('/yocalls', yo);
 app.use('/results', img);
 
