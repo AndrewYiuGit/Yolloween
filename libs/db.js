@@ -4,8 +4,12 @@ var users = db.get('users');
 var locations = db.get('locations');
 
 function getAddress(location, callback){
+    console.log("Location: " + location);
 	location = location.replace(";",",");
+    location = location.replace("%3B", ",");
+    location = location.replace("%3b", ",");
 	var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + location + "&key=" + process.env.GOOGLE_API;
+    console.log("URL: " + url);
 	https.get(url, function(response){
 		var str = '';
 		response.on('data', function (chunk) {
