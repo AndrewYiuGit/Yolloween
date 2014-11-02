@@ -66,15 +66,15 @@ function vote(type, username, location){
 	});
 }
 
-function getRating(location, callback){
-	getAddress(location, function(address){
-		locations.findOne({full_address: address.formatted_address}, function(err, data){
-			if (err){
+function getRating(location, callback) {
+	getAddress(location, function(address) {
+		locations.findOne({full_address: address.formatted_address}, function(err, data) {
+			if(err){
 				console.log(err);
-			} else if (data) {
+			} else if(data) {
 				callback(data);
 			} else {
-				console.log("Found no shit");
+				console.log("No entry found");
 			}
 		});
 	});
