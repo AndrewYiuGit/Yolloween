@@ -8,14 +8,14 @@ var color = [
 "#130912",
 "#3E1C33"
 ];
+var count = -1;
 
 nv.addGraph(function() {
-  chart = nv.models.lineChart()
-  .useInteractiveGuideline(true)
+  chart = nv.models.lineWithFocusChart()
   ;
 
   chart.xAxis
-  .axisLabel('Distance (m)')
+  .axisLabel('Street Number (m)')
   .tickFormat(d3.format(',r'))
   ;
 
@@ -23,6 +23,12 @@ nv.addGraph(function() {
   .axisLabel('Candy')
   .tickFormat(d3.format('.r'))
   ;
+
+  chart.y2Axis
+  .axisLabel('Candy')
+  .tickFormat(d3.format('.r'))
+  ;
+
   d3.select('#chart svg')
   .datum(getData())
   .transition().duration(500)
