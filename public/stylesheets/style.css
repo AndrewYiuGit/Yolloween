@@ -135,7 +135,8 @@ div.threefourths-pic {
 }
 
 .footer p {
-    margin: 0 auto;
+    float: right;
+    margin-right: 20px;
 }
 
 .footer a{
