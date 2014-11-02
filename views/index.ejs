@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html ng-app>
+<html>
 <head>
   <title> Yolloween </title>
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/nv.d3.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap.css">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 </head>
-<body ng-app="scopeExample">
-  <div class = "wrapper">
+<body>
+  <div class = "wrapper container-fluid">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
@@ -18,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="https://yolloween.herokuapp.com">
+          <a class="navbar-brand" href="https://yolloween.herokuapp.com" id="brand-logo">
             <img src="/assets/images/yolloween.png" height="35px" width="35px" id="brand-icon"></img>
             lloween
           </a>
@@ -26,9 +27,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li data-toggle="modal" data-target="#myModal" id="addStreetButton">
-              <i class="fa fa-plus"></i> Add a Street to compare</li>
+              <i class="fa fa-plus"></i> Add a Street</li>
             </ul>
-          </div><!--/.nav-collapse -->
+          </div>
         </div>
       </nav>
 
@@ -53,19 +54,16 @@
           </div>
         </div>
       </div>
-      <hr>
       <div id="chart">
         <svg></svg>
       </div>
-      </div>
     </div>
-    <div class="footer">
-      <p>Copyright © 2014. Made by <a href="http://www.github.com/thaingnguyen">Thai Nguyen</a>, <a href="">Andrew Yiu</a>, and <a href="http://austinchiang.me">Austin Chiang</a></p>
+    <footer class="footer">
+      <p>Copyright © 2014. Made by <a href="http://www.github.com/thaingnguyen">Thai Nguyen</a>, <a href="">Andrew Yiu</a>, and <a href="http://austinchiang.me">Austin Chiang</a> at <a href="http://yhack.org">YHack 2014</a></p>
     </div>
   </body>
 
   <script src="/javascript/d3.v3.js"></script>
-  <script src="/javascript/angular.min.js"></script>
   <script src="/javascript/nv.d3.min.js"></script>
   <script src="/lib/d3.v3.js"></script>
   <script src="/src/models/legend.js"></script>
