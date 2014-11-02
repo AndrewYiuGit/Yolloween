@@ -12,6 +12,7 @@ function initialize() {
 	};
 	map = new google.maps.Map(document.getElementById('map_canvas'),
 		mapOptions);
+	marker = new google.maps.Marker({map: map});
 
 	google.maps.event.addListener(map, 'click', 
 		function(event) {
@@ -61,8 +62,5 @@ google.maps.event.addDomListener(window, 'load', initialize);
 $('#myModal').on('shown.bs.modal', function () {
 	google.maps.event.trigger(map, "resize");
 	map.setCenter(new google.maps.LatLng(41.255158699999996, -72.9931128));
-	marker = new google.maps.Marker({
-		position: map.getCenter(),
-		map: map
-	});
+	marker.setPosition(map.getCenter());
 });
