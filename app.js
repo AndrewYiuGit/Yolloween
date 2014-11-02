@@ -8,7 +8,6 @@ var dotenv = require('dotenv');
 dotenv.load();
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var yo = require('./routes/yocalls');
 var img = require('./routes/results');
 
@@ -28,7 +27,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/yocalls', yo);
 app.use('/results', img);
 
