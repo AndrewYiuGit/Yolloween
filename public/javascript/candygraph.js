@@ -15,7 +15,7 @@ nv.addGraph(function() {
   ;
 
   chart.xAxis
-  .axisLabel('Street Number (m)')
+  .axisLabel('Street Number (#)')
   .tickFormat(d3.format(',r'))
   ;
 
