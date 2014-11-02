@@ -13,7 +13,7 @@ router.get('/yo',function(req,res){
 	var rating = db.getRating(location, function(data){
 		var url = "http://api.justyo.co/yo/";
 		var post_data = querystring.stringify({
-      		'api_token' : process.env.YOLLOWEEN_API,
+      		'api_token' : process.env.YOLLOWEEN,
       		'username': username,
       		'link': 'https://yolloween.herokuapp.com/results/?count=' + (data.upvote - data.downvote)
   			});
